@@ -270,6 +270,7 @@
 <body>
     <div class="container">
         <h1 id="mainHeading">Welcome!</h1>
+            <h3 id="currentTaskDisplay">No Task Selected</h3>
         <div class="subtitle">Choose your subject and way to study today!</div>
        
         
@@ -327,8 +328,22 @@
             <button class="btn btn-manage" onclick="window.location.href='todo.html'">Manage Tasks</button>
         </div>
     </div>
-    
+
+
     <script>
+        window.onload = function() {
+  const task = localStorage.getItem("currentTask");
+
+  if (task) {
+    document.getElementById("currentTaskDisplay").textContent = task;
+
+    // Auto select subject if task contains subject name
+    const subjectSelect = document.getElementById("subject");
+    if (task.toLowerCase().includes("math")) subjectSelect.value = "Maths";
+    if (task.toLowerCase().includes("science")) subjectSelect.value = "Science";
+  }
+};
+
          let userName = localStorage.getItem("userName");
 
     if (!userName) {
